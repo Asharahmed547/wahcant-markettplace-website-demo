@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: wahcant-container
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: unless-stopped
