@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart - WahCant Store</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVIGATION BAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo-section">
+      <a href="index.html" class="logo">
+        <i class="fas fa-shopping-bag"></i>
+        <span>WahCant</span>
+      </a>
+    </div>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> / <span>Shopping Cart</span>
+    </div>
+    <div class="nav-icons">
+      <a href="index.html" class="icon-btn">
+        <i class="fas fa-arrow-left"></i>
+        <span>Continue</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="container">
+    <h1>Your Shopping Cart</h1>
+    <p>Review your items and proceed to checkout</p>
+  </div>
+</section>
+
+<!-- CART SECTION -->
+<section class="cart-section">
+  <div class="container cart-container">
+    <!-- CART ITEMS -->
+    <div class="cart-items-wrapper">
+      <div class="cart-header">
+        <span class="item-count" id="itemCount">0 items</span>
+        <span class="cart-status" id="cartStatus"></span>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div id="emptyCart" class="empty-cart">
+        <div class="empty-icon">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+        <h3>Your Cart is Empty</h3>
+        <p>Time to add some amazing products!</p>
+        <a href="index.html" class="primary-btn">
+          <i class="fas fa-arrow-left"></i> Continue Shopping
+        </a>
+      </div>
+    </div>
+
+    <!-- CART SUMMARY -->
+    <div class="cart-summary">
+      <!-- ORDER SUMMARY CARD -->
+      <div class="summary-card">
+        <div class="summary-header">
+          <h3>Order Summary</h3>
+          <span class="order-badge">Express Checkout</span>
+        </div>
+        
+        <div class="summary-items">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal">Rs 0</span>
+          </div>
+          
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span id="shipping" class="shipping-info">Rs 0</span>
+          </div>
+          
+          <div class="summary-row">
+            <span>Tax (17%)</span>
+            <span id="tax">Rs 0</span>
+          </div>
+        </div>
+        
+        <div class="summary-divider"></div>
+        
+        <div class="summary-row total">
+          <span>Total Amount</span>
+          <span id="total" class="total-price">Rs 0</span>
+        </div>
+
+        <div class="discount-banner" id="discountBanner" style="display: none;">
+          <i class="fas fa-tag"></i>
+          <span>You save <strong id="savingAmount">Rs 0</strong></span>
+        </div>
+
+        <div class="promo-section">
+          <div class="promo-code">
+            <i class="fas fa-ticket-alt"></i>
+            <input type="text" placeholder="Promo code" id="promoCode">
+            <button id="applyPromo" class="promo-btn">Apply</button>
+          </div>
+          <small>Enter promo code for additional discounts</small>
+        </div>
+        
+        <button class="primary-btn full-width checkout-btn" id="checkoutBtn">
+          <i class="fas fa-lock"></i> Secure Checkout
+        </button>
+        <a href="index.html" class="secondary-btn full-width" style="margin-top: 12px;">
+          <i class="fas fa-arrow-left"></i> Continue Shopping
+        </a>
+      </div>
+
+      <!-- BENEFITS CARD -->
+      <div class="benefits-card">
+        <h4>Why Shop with Us?</h4>
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-truck"></i>
+          </div>
+          <div>
+            <h5>Free Shipping</h5>
+            <p>Orders over Rs 5,000</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-undo-alt"></i>
+          </div>
+          <div>
+            <h5>30-Day Returns</h5>
+            <p>No questions asked</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div>
+            <h5>Secure Payment</h5>
+            <p>100% encrypted</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <div>
+            <h5>24/7 Support</h5>
+            <p>Always here to help</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECOMMENDED PRODUCTS -->
+      <div class="recommended-card">
+        <h4>You Might Also Like</h4>
+        <div id="recommendedProducts" class="recommended-grid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>About WahCant</h3>
+      <p>Your trusted online marketplace for quality products at unbeatable prices.</p>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h3>Customer Service</h3>
+      <ul>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">Returns</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Company</h3>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Legal</h3>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 WahCant Store. All rights reserved. | Made with ❤️</p>
+  </div>
+</footer>
+
+<!-- NOTIFICATIONS -->
+<div class="notification" id="notification"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

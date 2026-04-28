@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "WahCant Burger",
+    "price": 250
+  },
+  {
+    "id": 2,
+    "name": "Student Notebook",
+    "price": 120
+  },
+  {
+    "id": 3,
+    "name": "Gaming Mouse",
+    "price": 1500
+  }
+]

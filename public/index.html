@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WahCant Store - Premium Shopping Experience</title>
+  <link rel="stylesheet" href="style-new.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVIGATION BAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo-section">
+      <a href="index.html" class="logo">
+        <i class="fas fa-shopping-bag"></i>
+        <span>WahCant</span>
+      </a>
+    </div>
+    
+    <div class="search-bar">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search iPhone, Laptop, Fashion..." id="searchInput">
+      <div class="search-suggestions" id="searchSuggestions" style="display: none;"></div>
+    </div>
+
+    <div class="nav-icons">
+      <button class="icon-btn wishlist-btn" title="Wishlist">
+        <i class="far fa-heart"></i>
+        <span class="badge">0</span>
+      </button>
+      <a href="cart.html" class="icon-btn cart-btn" title="Shopping Cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+      <button class="icon-btn user-menu-btn">
+        <i class="far fa-user-circle"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-slides">
+    <div class="hero-slide active">
+      <div class="hero-content">
+        <span class="hero-tag">🎉 Limited Time Offer</span>
+        <h1 class="hero-title">Summer Mega Sale</h1>
+        <p class="hero-subtitle">Up to 70% off on selected items</p>
+        <div class="hero-cta">
+          <button class="cta-btn primary-btn" id="shopBtn">Shop Now</button>
+          <button class="cta-btn secondary-btn">View All Deals</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-background"></div>
+  <div class="hero-particles"></div>
+</section>
+
+<!-- PROMOTIONAL BANNERS -->
+<section class="promo-banners">
+  <div class="container">
+    <div class="banner-grid">
+      <div class="promo-banner tech">
+        <h3>Tech Gadgets</h3>
+        <p>Latest Electronics</p>
+        <a href="#">Shop Now →</a>
+      </div>
+      <div class="promo-banner fashion">
+        <h3>Fashion</h3>
+        <p>Trending Styles</p>
+        <a href="#">Shop Now →</a>
+      </div>
+      <div class="promo-banner food">
+        <h3>Food & Beverage</h3>
+        <p>Premium Selection</p>
+        <a href="#">Shop Now →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER & SORT SECTION -->
+<section class="filters-section">
+  <div class="container">
+    <div class="filter-bar">
+      <div class="filter-left">
+        <button class="filter-toggle" id="filterToggle">
+          <i class="fas fa-sliders-h"></i> Filters
+        </button>
+        <div class="active-filters" id="activeFilters"></div>
+      </div>
+      <div class="filter-right">
+        <div class="filter-group">
+          <select id="sortSelect">
+            <option value="featured">⭐ Featured</option>
+            <option value="price-low">💲 Price: Low to High</option>
+            <option value="price-high">💲 Price: High to Low</option>
+            <option value="newest">✨ Newest</option>
+            <option value="popular">🔥 Most Popular</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select id="categorySelect">
+            <option value="all">All Products</option>
+            <option value="tech">📱 Tech</option>
+            <option value="fashion">👗 Fashion</option>
+            <option value="food">🍔 Food</option>
+          </select>
+        </div>
+        <button class="reset-filters" id="resetBtn">Reset</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEST SELLERS SECTION -->
+<section class="featured-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2>🔥 Best Sellers</h2>
+        <p>Most loved by our customers</p>
+      </div>
+      <a href="#products" class="view-all">View All →</a>
+    </div>
+    <div id="bestSellers" class="products-grid"></div>
+  </div>
+</section>
+
+<!-- MAIN PRODUCTS SECTION -->
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2>✨ All Products</h2>
+        <p>Discover our complete collection</p>
+      </div>
+    </div>
+    <div id="products-container" class="products-grid"></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS SECTION -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>⭐ What Customers Say</h2>
+      <p>Real reviews from real shoppers</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Amazing quality products and super fast delivery! Highly recommended."</p>
+        <div class="testimonial-author">
+          <img src="https://i.pravatar.cc/40?img=1" alt="User">
+          <div>
+            <h4>Sarah Khan</h4>
+            <span>Verified Buyer</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Great prices and excellent customer service. Will definitely shop again!"</p>
+        <div class="testimonial-author">
+          <img src="https://i.pravatar.cc/40?img=2" alt="User">
+          <div>
+            <h4>Ahmed Ali</h4>
+            <span>Verified Buyer</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Love the variety! Everything arrived in perfect condition. 5 stars!"</p>
+        <div class="testimonial-author">
+          <img src="https://i.pravatar.cc/40?img=3" alt="User">
+          <div>
+            <h4>Fatima Hassan</h4>
+            <span>Verified Buyer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER SECTION -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-content">
+      <div>
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Get exclusive deals and updates delivered to your inbox</p>
+      </div>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Enter your email" required>
+        <button class="primary-btn">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT QUICK VIEW MODAL -->
+<div class="modal" id="quickViewModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeQuickView()">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="quick-view-body" id="quickViewBody"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>About WahCant</h3>
+      <p>Your trusted online marketplace for quality products at unbeatable prices.</p>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h3>Customer Service</h3>
+      <ul>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">Returns</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Company</h3>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Legal</h3>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 WahCant Store. All rights reserved. | Made with ❤️</p>
+  </div>
+</footer>
+
+<!-- NOTIFICATIONS -->
+<div class="notification" id="notification"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
