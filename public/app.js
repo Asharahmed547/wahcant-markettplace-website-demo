@@ -154,30 +154,26 @@ function renderProducts(productsToRender = products) {
     const isInCart = cart.includes(product.id);
     
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = "product-card";
     
     card.innerHTML = `
-      <div class="card-image">
+      <div class="product-image">
         <img src="${product.img}" alt="${product.name}" />
-        ${product.badge ? `<span class="card-badge ${product.badge === 'Sale' ? 'discount' : ''}">${product.badge}</span>` : ''}
+        ${product.badge ? `<span class="product-badge ${product.badge === 'Sale' ? 'discount' : ''}">${product.badge}</span>` : ''}
+        <span class="product-rating">${generateStars(product.rating)} · ${product.reviews} reviews</span>
       </div>
-      <div class="card-body">
-        <div class="card-category">${product.category}</div>
-        <h3 class="card-title">${product.name}</h3>
-        <div class="card-rating">
-          <span class="stars">${generateStars(product.rating)}</span>
-          <span class="count">${product.reviews} reviews</span>
-        </div>
-        <div class="card-price">
+      <div class="product-info">
+        <div class="product-category">${product.category}</div>
+        <h3 class="product-name">${product.name}</h3>
+        <div class="product-price">
           <span class="price-current">${formatPrice(product.price)}</span>
           <span class="price-original">${formatPrice(product.originalPrice)}</span>
-          <span style="color: #ef4444; font-weight: 600; font-size: 12px;">${discount}% off</span>
         </div>
-        <div class="card-actions">
-          <button class="card-btn add-to-cart" onclick="addToCart(${product.id})">
+        <div class="product-actions">
+          <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
             <i class="fas fa-shopping-cart"></i> ${isInCart ? 'In Cart' : 'Add to Cart'}
           </button>
-          <button class="card-btn wishlist-btn-card" onclick="toggleWishlist(${product.id})">
+          <button class="wishlist-btn-card" onclick="toggleWishlist(${product.id})">
             <i class="far fa-heart"></i>
           </button>
         </div>
