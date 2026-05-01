@@ -131,6 +131,71 @@ function updateCartBadge() {
   if (badge) badge.textContent = cart.length;
 }
 
+function selectSuggestion(value) {
+  const searchInput = document.getElementById("searchInput");
+  const suggestions = document.getElementById("searchSuggestions");
+  if (searchInput) searchInput.value = value;
+  if (suggestions) suggestions.style.display = "none";
+  handleSearch(value);
+}
+
+function updateSearchSuggestions(query) {
+  const suggestionsEl = document.getElementById("searchSuggestions");
+  if (!suggestionsEl) return;
+  const trimmed = query.trim();
+  if (trimmed.length === 0) {
+    suggestionsEl.style.display = "none";
+    suggestionsEl.innerHTML = "";
+    return;
+  }
+  const matches = products.filter(p =>
+    p.name.toLowerCase().includes(trimmed.toLowerCase()) ||
+    p.category.toLowerCase().includes(trimmed.toLowerCase())
+  ).slice(0, 5);
+
+  suggestionsEl.innerHTML = matches.length
+    ? matches.map(p => `<div onclick="selectSuggestion('${p.name.replace(/'/g, "\\'")}')">${p.name}</div>`).join("")
+    : `<div>No suggestions found</div>`;
+  suggestionsEl.style.display = "block";
+}
+
+function openQuickView(id) {
+  const product = products.find(p => p.id === id);
+  const modal = document.getElementById("quickViewModal");
+  const body = document.getElementById("quickViewBody");
+  if (!product || !modal || !body) return;
+
+  body.innerHTML = `
+    <div class="quick-view-card">
+      <div class="quick-view-image">
+        <img src="${product.img}" alt="${product.name}" />
+      </div>
+      <div class="quick-view-info">
+        <span class="quick-view-badge">${product.badge || "Featured"}</span>
+        <h2>${product.name}</h2>
+        <p class="quick-view-category">${product.category.toUpperCase()}</p>
+        <div class="quick-view-rating">${generateStars(product.rating)} <span>(${product.reviews} reviews)</span></div>
+        <div class="quick-view-price">
+          <span>${formatPrice(product.price)}</span>
+          <small>${formatPrice(product.originalPrice)}</small>
+        </div>
+        <p class="quick-view-description">Experience premium quality and sleek design with this top-rated selection, crafted for modern shoppers who value style and performance.</p>
+        <div class="quick-view-actions">
+          <button class="primary-btn" onclick="addToCart(${product.id}); closeQuickView();">Add to Cart</button>
+          <button class="secondary-btn" onclick="closeQuickView();">Close</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  modal.classList.add("active");
+}
+
+function closeQuickView() {
+  const modal = document.getElementById("quickViewModal");
+  if (modal) modal.classList.remove("active");
+}
+
 // ===== PRODUCT RENDERING =====
 function renderProducts(productsToRender = products) {
   const productDiv = document.getElementById("products");
@@ -173,7 +238,10 @@ function renderProducts(productsToRender = products) {
           <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
             <i class="fas fa-shopping-cart"></i> ${isInCart ? 'In Cart' : 'Add to Cart'}
           </button>
-          <button class="wishlist-btn-card" onclick="toggleWishlist(${product.id})">
+          <button class="quick-view-btn" onclick="openQuickView(${product.id})">
+            <i class="fas fa-eye"></i> Quick View
+          </button>
+          <button class="wishlist-btn-card" onclick="toggleWishlist(event, ${product.id})">
             <i class="far fa-heart"></i>
           </button>
         </div>
@@ -235,11 +303,11 @@ function updateQuantity(id, quantity) {
   renderCart();
 }
 
-function toggleWishlist(id) {
-  const btn = event.target.closest('.wishlist-btn-card');
+function toggleWishlist(event, id) {
+  const btn = event.currentTarget || event.target.closest('.wishlist-btn-card');
   if (btn) {
     btn.classList.toggle('active');
-    showNotification("Added to wishlist");
+    showNotification(`★ ${products.find(p => p.id === id)?.name || 'Item'} ${btn.classList.contains('active') ? 'added to' : 'removed from'} wishlist`);
   }
 }
 
@@ -315,7 +383,27 @@ function updateCartSummary() {
   document.getElementById("total").textContent = formatPrice(total);
 }
 
+function renderRecommendedProducts() {
+  const recommendedDiv = document.getElementById("recommendedProducts");
+  if (!recommendedDiv) return;
+
+  const recommended = products
+    .filter(product => !cart.includes(product.id))
+    .slice(0, 4);
+
+  recommendedDiv.innerHTML = recommended.map(product => `
+    <div class="recommended-product">
+      <img src="${product.img}" alt="${product.name}" />
+      <div>
+        <h5>${product.name}</h5>
+        <small>${formatPrice(product.price)}</small>
+      </div>
+    </div>
+  `).join("");
+}
+
 // ===== FILTERING & SORTING =====
+
 function filterAndSort() {
   const sortSelect = document.getElementById("sortSelect");
   const categorySelect = document.getElementById("categorySelect");
@@ -386,13 +474,27 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sortSelect) sortSelect.addEventListener("change", filterAndSort);
     if (categorySelect) categorySelect.addEventListener("change", filterAndSort);
     if (resetBtn) resetBtn.addEventListener("click", resetFilters);
-    if (searchInput) searchInput.addEventListener("input", (e) => handleSearch(e.target.value));
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        handleSearch(e.target.value);
+        updateSearchSuggestions(e.target.value);
+      });
+      searchInput.addEventListener("focus", (e) => updateSearchSuggestions(e.target.value));
+      document.addEventListener("click", (event) => {
+        const suggestions = document.getElementById("searchSuggestions");
+        if (!suggestions || !searchInput) return;
+        if (!suggestions.contains(event.target) && event.target !== searchInput) {
+          suggestions.style.display = "none";
+        }
+      });
+    }
     if (shopBtn) shopBtn.addEventListener("click", () => document.querySelector(".products-section").scrollIntoView({ behavior: "smooth" }));
   }
   
   // Cart page setup
   if (document.getElementById("cartItems")) {
     renderCart();
+    renderRecommendedProducts();
     updateCartBadge();
     
     const checkoutBtn = document.getElementById("checkoutBtn");
@@ -418,4 +520,13 @@ document.addEventListener("DOMContentLoaded", () => {
       showNotification("✓ Thank you for your order!");
     });
   }
+
+  const quickViewModal = document.getElementById("quickViewModal");
+  if (quickViewModal) {
+    quickViewModal.addEventListener("click", (e) => {
+      if (e.target === quickViewModal) closeQuickView();
+    });
+  }
 });
+
+// ashar
