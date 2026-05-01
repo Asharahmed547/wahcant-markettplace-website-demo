@@ -1,11 +1,11 @@
-version: "3.8"
+version: '3.8'
 
 services:
   app:
     container_name: wahcant-container
     build: .
     ports:
-      - "5000:5000"
+      - "80:5000"           
     volumes:
       - .:/app
       - /app/node_modules
